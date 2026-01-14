@@ -1,7 +1,15 @@
 ---
+- name: Remove managed repo files before adding repo to allow updating URLs
+  when:
+    - item.update_url is defined
+    - item.update_url
+  ansible.builtin.file:
+    path: "{{ item.filename }}"
+    state: absent
+  loop: "{{ apt_repositories }}"
 
 - name: Adding apt repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     codename: "{{ item.codename | default(omit) }}"
     filename: "{{ item.filename | default(omit) }}"
     mode: "{{ item.mode | default(omit) }}"
