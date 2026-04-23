@@ -15,10 +15,23 @@
 #     validate_certs: yes
 #     state: present
 # apt_repositories:
-#   - codename: trusty
-#     filename: google-chrome
+#   # deb822 format (default)
+#   - name: google-chrome
+#     uris: https://dl.google.com/linux/chrome/deb/
+#     suites: stable
+#     components:
+#       - main
+#     signed_by: https://dl.google.com/linux/linux_signing_key.pub
+#     types:
+#       - deb
 #     mode: 0644
-#     repo: 'ppa:nginx/stable'
+#     state: present
+#     update_cache: yes
+#   # legacy apt_repository format (set apt_repositories_use_deb822: no)
+#   - filename: nginx
+#     codename: trusty
+#     mode: 0644
+#     repo: "ppa:nginx/stable"
 #     state: present
 #     update_cache: yes
 
@@ -30,32 +43,31 @@ apt_dependencies:
 # sets the amount of time the cache is valid
 apt_cache_valid_time: 3600
 # upgrade system: safe | full | dist
-apt_upgrade: no
+apt_upgrade: false
 # packages to ensure
 apt_packages: []
 # purge configuration when removing packages
-apt_remove_purge: no
+apt_remove_purge: false
 # default package state
-apt_package_state: 'present'
+apt_package_state: "present"
 # remove packages that are no longer needed for dependencies
-apt_autoremove: yes
+apt_autoremove: true
 # remove .deb files for packages no longer on your system
-apt_autoclean: yes
+apt_autoclean: true
 # .deb packages to install.
 apt_deb_packages: []
-
 # https://people.debian.org/~hmh/invokerc.d-policyrc.d-specification.txt
 apt_policy: 101
 # whether or not suggested packages should be installed.
-apt_install_suggests: no
+apt_install_suggests: false
 # do not install Recommended packages by default
-apt_install_recommends: no
+apt_install_recommends: false
 # allow 'apt-get autoremove' to remove suggested packages
-apt_remove_suggests: no
+apt_remove_suggests: false
 # allow 'apt-get autoremove' to remove recommended packages
-apt_remove_recommends: no
+apt_remove_recommends: false
 # Enable the update/upgrade script
-apt_periodic: yes
+apt_periodic: true
 # Do “apt-get update” automatically every n-days (0=disable)
 apt_update_package_lists: 1
 # Do “apt-get upgrade –download-only” every n-days (0=disable)
@@ -64,21 +76,21 @@ apt_download_upgradeable_packages: 0
 apt_auto_clean_interval: 0
 
 # enable unattended-upgrades
-apt_unattended_upgrades: yes
+apt_unattended_upgrades: true
 # list of origins patterns to control which packages are upgraded
 # replaces allowed-origins, kept for compatibility
 apt_unattended_upgrades_origins: []
 # List of allowed-origins, default value kept for compatibility
 # set to null to use origins-pattern
 apt_unattended_upgrades_allowed:
-- ${distro_id}:${distro_codename}-security
+  - ${distro_id}:${distro_codename}-security
 # list of packages to not update (regexp are supported)
 apt_unattended_upgrades_blacklist: []
 # Split the upgrade into the smallest possible chunks so that
 # they can be interrupted with SIGUSR1. This makes the upgrade
 # a bit slower but it has the benefit that shutdown while a upgrade
 # is running is possible (with a small delay)
-apt_unattended_upgrades_minimal_steps: no
+apt_unattended_upgrades_minimal_steps: false
 # Send email to this address for problems or packages upgrades
 # If empty or unset then no email is sent, make sure that you
 # have a working mail setup on your system. A package that provides
@@ -86,26 +98,26 @@ apt_unattended_upgrades_minimal_steps: no
 apt_mails: []
 # Set this value to "true" to get emails only on errors. Default
 # is to always send a mail if Unattended-Upgrade::Mail is set
-apt_unattended_upgrades_notify_error_only: yes
+apt_unattended_upgrades_notify_error_only: true
 # Do automatic removal of new unused dependencies after the upgrade
 # (equivalent to apt-get autoremove)
-apt_unattended_upgrades_autoremove: yes
+apt_unattended_upgrades_autoremove: true
 # Automatically reboot *WITHOUT CONFIRMATION*
 # if the file /var/run/reboot-required is found after the upgrade
-apt_unattended_upgrades_automatic_reboot: no
+apt_unattended_upgrades_automatic_reboot: false
 # Automatically reboot even if there are users currently logged in.
-apt_unattended_upgrades_automatic_reboot_with_users: no
+apt_unattended_upgrades_automatic_reboot_with_users: false
 # If automatic reboot is enabled and needed, reboot at the specific
 # time instead of immediately
 # Values: now | 02:00 | ...
 apt_unattended_upgrades_automatic_reboot_time: now
 # Enable logging to syslog.
-apt_unattended_upgrades_syslog_enable: no
+apt_unattended_upgrades_syslog_enable: false
 # Specify syslog facility.
 apt_unattended_upgrades_syslog_facility: daemon
 
 # Override download timer ? Default no
-apt_unattended_upgrades_download_timer_override: null
+apt_unattended_upgrades_download_timer_override:
 # In case of override :
 # apt_unattended_upgrades_download_timer_override:
 #   on_calendar_replace: (true|false) If true, delete default system schedule. If not, default and new schedules will be merged
@@ -115,7 +127,7 @@ apt_unattended_upgrades_download_timer_override: null
 # See systemd.time.5 for random delay and persistent
 
 # Override upgrade timer the same way
-apt_unattended_upgrades_upgrade_timer_override: null
+apt_unattended_upgrades_upgrade_timer_override:
 # apt_unattended_upgrades_upgrade_timer_override:
 #   on_calendar_replace:
 #   on_calendar:
@@ -126,9 +138,10 @@ apt_unattended_upgrades_upgrade_timer_override: null
 #   tmpfs:  remount tmp before running if mounted noexec
 #   rootfs: remount root filesystem r/w before running if mounted r/o
 apt_remount_filesystems: []
-
 # repositories to register
 apt_repositories: []
+# use deb822_repository for apt_repositories, set to no to use apt_repository
+apt_repositories_use_deb822: true
 # gpg keys for external repositories
 apt_keys: []
 # HTTP proxy server (optional)
@@ -143,7 +156,6 @@ apt_keys: []
 #   - removals
 #   - canceled-actions
 apt_aptitude_solution_cost: []
-
 # List of preferences options.
 # apt_preferences:
 #   - file: perl
