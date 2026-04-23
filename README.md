@@ -44,7 +44,7 @@ $ git clone https://github.com/weareinteractive/ansible-apt.git weareinteractive
 
 ## Dependencies
 
-* Ansible >= 2.4
+* Ansible >= 2.15
 
 ## Variables
 
@@ -68,10 +68,23 @@ Here is a list of all the default variables for this role, which are also availa
 #     validate_certs: yes
 #     state: present
 # apt_repositories:
-#   - codename: trusty
-#     filename: google-chrome
+#   # deb822 format (default)
+#   - name: google-chrome
+#     uris: https://dl.google.com/linux/chrome/deb/
+#     suites: stable
+#     components:
+#       - main
+#     signed_by: https://dl.google.com/linux/linux_signing_key.pub
+#     types:
+#       - deb
 #     mode: 0644
-#     repo: 'ppa:nginx/stable'
+#     state: present
+#     update_cache: yes
+#   # legacy apt_repository format (set apt_repositories_use_deb822: no)
+#   - filename: nginx
+#     repo: "ppa:nginx/stable"
+#     codename: trusty
+#     mode: 0644
 #     state: present
 #     update_cache: yes
 
@@ -182,6 +195,8 @@ apt_remount_filesystems: []
 
 # repositories to register
 apt_repositories: []
+# use deb822_repository for apt_repositories, set to no to use apt_repository
+apt_repositories_use_deb822: true
 # gpg keys for external repositories
 apt_keys: []
 # HTTP proxy server (optional)
