@@ -1,20 +1,22 @@
 ---
-
-- import_tasks: config.yml
+- name: Configure APT
+  ansible.builtin.import_tasks: config.yml
   tags:
     - system
     - apt
     - config
     - apt-config
 
-- import_tasks: manage.yml
+- name: Manage APT repositories and keys
+  ansible.builtin.import_tasks: manage.yml
   tags:
     - system
     - apt
     - manage
     - apt-manage
 
-- import_tasks: install.yml
+- name: Install APT packages
+  ansible.builtin.import_tasks: install.yml
   tags:
     - system
     - apt

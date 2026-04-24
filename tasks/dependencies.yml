@@ -1,6 +1,5 @@
 ---
-
 - name: Installing dependency packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ apt_dependencies }}"
     state: present

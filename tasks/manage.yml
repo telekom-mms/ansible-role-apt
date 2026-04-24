@@ -1,7 +1,13 @@
 ---
-
-- include_tasks: keys.yml
-- include_tasks: repositories.yml
-- include_tasks: preferences.yml
-- include_tasks: packages.yml
-- include_tasks: debs.yml
+- name: Add APT signing keys
+  ansible.builtin.include_tasks: keys.yml
+  when: not ((ansible_os_family == 'Debian' and ansible_distribution_major_version | int >= 13) or
+    (ansible_distribution == 'Ubuntu' and ansible_distribution_major_version | int >= 25))
+- name: Add APT repositories
+  ansible.builtin.include_tasks: repositories.yml
+- name: Configure APT package preferences
+  ansible.builtin.include_tasks: preferences.yml
+- name: Manage APT packages
+  ansible.builtin.include_tasks: packages.yml
+- name: Install DEB packages
+  ansible.builtin.include_tasks: debs.yml

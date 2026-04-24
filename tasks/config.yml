@@ -1,7 +1,6 @@
 ---
-
 - name: Configuring APT
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "/{{ item }}"
     owner: "root"
@@ -12,7 +11,7 @@
     - "etc/apt/apt.conf.d/10periodic"
 
 - name: Configuring APT
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "/{{ item }}"
     owner: "root"
@@ -23,15 +22,15 @@
     - "etc/apt/apt.conf.d/50unattended-upgrades"
 
 - name: Configuring APT Download timer
-  include_tasks: unattended_upgrades_download_timer.yml
+  ansible.builtin.include_tasks: unattended_upgrades_download_timer.yml
   when: apt_unattended_upgrades_download_timer_override is not none
 
 - name: Configuring APT Upgrade timer
-  include_tasks: unattended_upgrades_upgrade_timer.yml
+  ansible.builtin.include_tasks: unattended_upgrades_upgrade_timer.yml
   when: apt_unattended_upgrades_upgrade_timer_override is not none
 
 - name: Configuring remount filesystems
-  template:
+  ansible.builtin.template:
     src: "etc/apt/apt.conf.d/10remount_{{ item }}.j2"
     dest: "/etc/apt/apt.conf.d/10remount_{{ item }}"
     owner: "root"
@@ -42,7 +41,7 @@
     - "{{ apt_remount_filesystems }}"
 
 - name: Configuring APT proxy behavior
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "/{{ item }}"
     owner: "root"
@@ -53,7 +52,7 @@
     - "etc/apt/apt.conf.d/00proxy"
 
 - name: Alter Aptitude solution costs
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "/{{ item }}"
     owner: "root"
@@ -63,8 +62,8 @@
   with_items:
     - "etc/apt/apt.conf.d/20alter-aptitude-solution-cost"
 
-- name: prevent apt from starting services
-  copy:
+- name: Prevent apt from starting services
+  ansible.builtin.copy:
     content: "exit {{ apt_policy }}"
     dest: /usr/sbin/policy-rc.d
     mode: "0755"

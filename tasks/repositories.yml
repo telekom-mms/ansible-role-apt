@@ -1,15 +1,91 @@
 ---
 - name: Remove managed repo files before adding repo to allow updating URLs
   when:
+    - apt_repositories_use_deb822 | bool
     - item.update_url is defined
-    - item.filename is defined
     - item.update_url
+    - item.name is defined
   ansible.builtin.file:
-    path: "/etc/apt/sources.list.d/{{ item.filename }}.list"
+    path: "/etc/apt/sources.list.d/{{ item.name }}.sources"
     state: absent
   loop: "{{ apt_repositories }}"
 
-- name: Adding apt repository
+- name: Validate apt_repositories for deb822_repository
+  when: apt_repositories_use_deb822 | bool
+  ansible.builtin.assert:
+    that:
+      - item.repo is not defined
+      - item.name is defined or item.filename is defined
+      - (item.state | default('present')) == 'absent' or item.uris is defined
+      - (item.state | default('present')) == 'absent' or item.suites is defined or item.codename is defined
+    fail_msg: >-
+      apt_repositories entries must use deb822_repository fields.
+      Required: name (or filename for compatibility), uris, suites (or codename).
+      Unsupported legacy field: repo.
+  loop: "{{ apt_repositories }}"
+
+- name: Adding apt repository in deb822 format
+  when: apt_repositories_use_deb822 | bool
+  ansible.builtin.deb822_repository:
+    allow_insecure: "{{ item.allow_insecure | default(omit) }}"
+    allow_weak: "{{ item.allow_weak | default(omit) }}"
+    by_hash: "{{ item.by_hash | default(omit) }}"
+    check_date: "{{ item.check_date | default(omit) }}"
+    check_valid_until: "{{ item.check_valid_until | default(omit) }}"
+    components: "{{ item.components | default(omit) }}"
+    date_max_future: "{{ item.date_max_future | default(omit) }}"
+    enabled: "{{ item.enabled | default(omit) }}"
+    inrelease_path: "{{ item.inrelease_path | default(omit) }}"
+    languages: "{{ item.languages | default(omit) }}"
+    mode: "{{ item.mode | default(omit) }}"
+    name: "{{ item.name | default(item.filename) }}"
+    pdiffs: "{{ item.pdiffs | default(omit) }}"
+    signed_by: "{{ item.signed_by | default(omit) }}"
+    suites: "{{ item.suites | default(item.codename) | default(omit) }}"
+    targets: "{{ item.targets | default(omit) }}"
+    trusted: "{{ item.trusted | default(omit) }}"
+    types: "{{ item.types | default(omit) }}"
+    uris: "{{ item.uris | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+  register: apt_repositories_result
+  with_items: "{{ apt_repositories }}"
+
+- name: Update apt cache after deb822 repository changes
+  ansible.builtin.apt:
+    update_cache: true
+  when:
+    - apt_repositories_use_deb822 | bool
+    - item.changed
+    - item.item.update_cache | default(true) | bool
+  loop: "{{ apt_repositories_result.results | default([]) }}"
+
+- name: Remove managed legacy repo files before adding repo to allow updating URLs
+  when:
+    - not (apt_repositories_use_deb822 | bool)
+    - item.update_url is defined
+    - item.update_url
+    - item.filename is defined
+  ansible.builtin.file:
+    path: "{{ item.filename }}"
+    state: absent
+  loop: "{{ apt_repositories }}"
+
+- name: Validate apt_repositories for legacy apt_repository
+  when: not (apt_repositories_use_deb822 | bool)
+  ansible.builtin.assert:
+    that:
+      - item.name is not defined
+      - item.uris is not defined
+      - item.suites is not defined
+      - item.repo is defined or (item.state | default('present')) == 'absent'
+    fail_msg: >-
+      apt_repositories entries must use legacy apt_repository fields.
+      Required: repo (unless state=absent).
+      Unsupported deb822 fields in legacy mode: name, uris, suites.
+  loop: "{{ apt_repositories }}"
+
+- name: Adding apt repository in legacy format
+  when: not (apt_repositories_use_deb822 | bool)
   ansible.builtin.apt_repository:
     codename: "{{ item.codename | default(omit) }}"
     filename: "{{ item.filename | default(omit) }}"
