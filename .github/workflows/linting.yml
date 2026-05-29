@@ -1,0 +1,16 @@
+---
+name: Linting
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  call-linting:
+    uses: telekom-mms/.github/.github/workflows/ansible-lint.yml@main

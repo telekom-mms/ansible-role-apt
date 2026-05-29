@@ -1,0 +1,79 @@
+output_template: |
+  <!-- BEGIN_ANSIBLE_DOCS -->
+
+  # Ansible role {{ metadata.galaxy_info.namespace }}.{{ metadata.galaxy_info.role_name }}
+
+  Thankfully forked from [weareinteractive.apt](https://github.com/weareinteractive/ansible-apt).
+
+  {{ metadata.galaxy_info.description }}
+
+  ## Supported Operating Systems
+
+  {%- for platform in metadata.galaxy_info.platforms %}
+  - {{ platform.name }}
+    {%- if "versions" in platform %}
+    - {{ platform.versions | default([]) | join(', ') }}
+    {%- endif %}
+  {%- endfor %}
+
+  ## Role Variables
+  {% for entrypoint in argument_specs.keys() %}
+  {%- set path, options=entrypoint_options[entrypoint][0] -%}
+  {%- for name, details in options.items() |sort() %}
+  - `{{ name }}`
+    - Default: `{{ details.display_default }}`
+    - Description: {{ details.display_description }}
+    - Type: {{ details.display_type }}
+    - Required: {{ details.display_required }}
+  {%- endfor %}
+  {%- endfor %}
+
+  ## Dependencies
+
+  {%- if ("dependencies" in metadata) and (metadata.dependencies | length > 0) %}
+  {%- for dependency in metadata.dependencies %}
+  - {{ dependency }}
+  {%- endfor %}
+  {%- else %}
+
+  None.
+  {%- endif %}
+
+  ## Example Playbook
+
+  ```
+  - hosts: all
+    vars:
+      apt_cache_valid_time: 7200
+      apt_packages:
+        - vim
+        - tree
+        - name: ca-certificates
+          state: latest
+          hold: true
+        - name: zsh
+          state: absent
+          purge: true
+      apt_deb_packages:
+        - "https://releases.hashicorp.com/vagrant/2.1.5/vagrant_2.1.5_x86_64.deb"
+      apt_mails:
+        - root
+      apt_preferences:
+        - file: perl
+          package: perl
+          pin: "version 5.20*"
+          priority: 1001
+      apt_unattended_upgrades_notify_error_only: false
+      apt_remove_recommends: true
+      apt_remove_suggests: true
+      apt_remove_purge: true
+    roles:
+      - {{ metadata.galaxy_info.namespace }}.{{ metadata.galaxy_info.role_name }}
+
+  ```
+
+  # License
+
+  {{ metadata.galaxy_info.license }}
+
+  <!-- END_ANSIBLE_DOCS -->
