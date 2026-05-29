@@ -1,0 +1,153 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Gather installed package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Assert expected packages are installed
+      ansible.builtin.assert:
+        that:
+          - "'vim' in ansible_facts.packages"
+          - "'tree' in ansible_facts.packages"
+          - "'ca-certificates' in ansible_facts.packages"
+
+    - name: Assert icinga archive keyring package is installed
+      ansible.builtin.assert:
+        that:
+          - "'icinga-archive-keyring' in ansible_facts.packages"
+
+    - name: Check icinga keyring file exists
+      ansible.builtin.stat:
+        path: /usr/share/keyrings/icinga-archive-keyring.gpg
+      register: icinga_keyring_stat
+
+    - name: Assert icinga keyring file exists
+      ansible.builtin.assert:
+        that:
+          - icinga_keyring_stat.stat.exists
+
+    - name: Assert zsh package is absent
+      ansible.builtin.assert:
+        that:
+          - "'zsh' not in ansible_facts.packages"
+
+    - name: Get held packages
+      ansible.builtin.command: apt-mark showhold
+      register: apt_held_packages
+      changed_when: false
+
+    - name: Assert ca-certificates is held
+      ansible.builtin.assert:
+        that:
+          - "'ca-certificates' in apt_held_packages.stdout_lines"
+
+    - name: Check apt preferences file exists
+      ansible.builtin.stat:
+        path: /etc/apt/preferences.d/perl
+      register: perl_preferences_stat
+
+    - name: Assert apt preferences file exists with expected permissions
+      ansible.builtin.assert:
+        that:
+          - perl_preferences_stat.stat.exists
+          - perl_preferences_stat.stat.mode == '0644'
+
+    - name: Read apt preferences file
+      ansible.builtin.slurp:
+        path: /etc/apt/preferences.d/perl
+      register: perl_preferences_content
+
+    - name: Assert apt preferences content
+      ansible.builtin.assert:
+        that:
+          - "'Package: perl' in (perl_preferences_content.content | b64decode)"
+          - "'Pin: version 5.20*' in (perl_preferences_content.content | b64decode)"
+          - "'Pin-Priority: 1001' in (perl_preferences_content.content | b64decode)"
+
+    - name: Read unattended-upgrades apt config
+      ansible.builtin.slurp:
+        path: /etc/apt/apt.conf.d/50unattended-upgrades
+      register: unattended_upgrades_config
+
+    - name: Assert unattended-upgrades mail settings
+      ansible.builtin.assert:
+        that:
+          - "'Unattended-Upgrade::Mail \"root\";' in (unattended_upgrades_config.content | b64decode)"
+          - "'Unattended-Upgrade::MailOnlyOnError \"false\";' in (unattended_upgrades_config.content | b64decode)"
+
+    - name: Read general apt config
+      ansible.builtin.slurp:
+        path: /etc/apt/apt.conf.d/10general
+      register: apt_general_config
+
+    - name: Assert apt remove behavior settings
+      ansible.builtin.assert:
+        that:
+          - "'APT::AutoRemove::RecommendsImportant \"false\";' in (apt_general_config.content | b64decode)"
+          - "'APT::AutoRemove::SuggestsImportant \"false\";' in (apt_general_config.content | b64decode)"
+          - "'APT::Get::Purge \"true\";' in (apt_general_config.content | b64decode)"
+
+    - name: Check deb822 repository file
+      when: inventory_hostname in ['debian13', 'ubuntu2404', 'ubuntu2604']
+      ansible.builtin.stat:
+        path: /etc/apt/sources.list.d/icinga.sources
+      register: deb822_repo_stat
+
+    - name: Assert deb822 repository file exists
+      when: inventory_hostname in ['debian13', 'ubuntu2404', 'ubuntu2604']
+      ansible.builtin.assert:
+        that:
+          - deb822_repo_stat.stat.exists
+
+    - name: Read deb822 repository file
+      when: inventory_hostname in ['debian13', 'ubuntu2404', 'ubuntu2604']
+      ansible.builtin.slurp:
+        path: /etc/apt/sources.list.d/icinga.sources
+      register: deb822_repo_content
+
+    - name: Set expected deb822 suite
+      when: inventory_hostname in ['debian13', 'ubuntu2404', 'ubuntu2604']
+      ansible.builtin.set_fact:
+        expected_icinga_suite: "{{ 'icinga-' ~ ((ansible_facts.distribution == 'Ubuntu') | ternary(ansible_facts.lsb.codename, ansible_facts.distribution_release)) }}"
+
+    - name: Assert deb822 repository content
+      when: inventory_hostname in ['debian13', 'ubuntu2404', 'ubuntu2604']
+      ansible.builtin.assert:
+        that:
+          - "('URIs: https://packages.icinga.com/' ~ (ansible_facts.distribution | lower)) in (deb822_repo_content.content | b64decode)"
+          - "('Suites: ' ~ expected_icinga_suite) in (deb822_repo_content.content | b64decode)"
+          - "'Components: main' in (deb822_repo_content.content | b64decode)"
+          - "'Signed-By: /usr/share/keyrings/icinga-archive-keyring.gpg' in (deb822_repo_content.content | b64decode)"
+
+    - name: Check legacy repository file
+      when: inventory_hostname in ['debian11', 'debian12', 'ubuntu2204']
+      ansible.builtin.stat:
+        path: /etc/apt/sources.list.d/icinga.list
+      register: legacy_repo_stat
+
+    - name: Assert legacy repository file exists
+      when: inventory_hostname in ['debian11', 'debian12', 'ubuntu2204']
+      ansible.builtin.assert:
+        that:
+          - legacy_repo_stat.stat.exists
+
+    - name: Read legacy repository file
+      when: inventory_hostname in ['debian11', 'debian12', 'ubuntu2204']
+      ansible.builtin.slurp:
+        path: /etc/apt/sources.list.d/icinga.list
+      register: legacy_repo_content
+
+    - name: Set expected legacy suite
+      when: inventory_hostname in ['debian11', 'debian12', 'ubuntu2204']
+      ansible.builtin.set_fact:
+        expected_legacy_suite: "{{ 'icinga-' ~ ((ansible_facts.distribution == 'Ubuntu') | ternary(ansible_facts.lsb.codename, ansible_facts.distribution_release)) }}"
+
+    - name: Assert legacy repository content
+      when: inventory_hostname in ['debian11', 'debian12', 'ubuntu2204']
+      ansible.builtin.assert:
+        that:
+          - "('https://packages.icinga.com/' ~ (ansible_facts.distribution | lower)) in (legacy_repo_content.content | b64decode)"
+          - "(expected_legacy_suite ~ ' main') in (legacy_repo_content.content | b64decode)"
+          - "'signed-by=/usr/share/keyrings/icinga-archive-keyring.gpg' in (legacy_repo_content.content | b64decode)"
