@@ -1,0 +1,226 @@
+---
+argument_specs:
+  main:
+    short_description: The main entry point for the apt role.
+    version_added: 1.0.0
+    options:
+      apt_dependencies:
+        default:
+          - aptitude
+          - python3-apt
+          - python3-pycurl
+        type: list
+        elements: str
+        description: Dependencies required to manage apt packages.
+
+      apt_cache_valid_time:
+        default: 3600
+        type: int
+        description: Time in seconds before apt cache is considered stale.
+
+      apt_upgrade:
+        default: false
+        type: raw
+        description: Upgrade mode (safe, full, dist) or false to disable upgrades.
+
+      apt_packages:
+        default: []
+        type: list
+        elements: str
+        description: Packages to ensure are installed or managed.
+
+      apt_remove_purge:
+        default: false
+        type: bool
+        description: Purge package configuration files when removing packages.
+
+      apt_package_state:
+        default: present
+        type: str
+        description: Default package state for managed packages.
+
+      apt_autoremove:
+        default: true
+        type: bool
+        description: Remove packages no longer needed as dependencies.
+
+      apt_autoclean:
+        default: true
+        type: bool
+        description: Remove package files that can no longer be downloaded.
+
+      apt_deb_packages:
+        default: []
+        type: list
+        elements: str
+        description: Local .deb package files to install.
+
+      apt_policy:
+        default: 101
+        type: int
+        description: Value used for policy-rc.d while installing packages.
+
+      apt_install_suggests:
+        default: false
+        type: bool
+        description: Whether suggested packages should be installed.
+
+      apt_install_recommends:
+        default: false
+        type: bool
+        description: Whether recommended packages should be installed.
+
+      apt_remove_suggests:
+        default: false
+        type: bool
+        description: Allow autoremove to remove suggested packages.
+
+      apt_remove_recommends:
+        default: false
+        type: bool
+        description: Allow autoremove to remove recommended packages.
+
+      apt_periodic:
+        default: true
+        type: bool
+        description: Enable periodic apt update and upgrade behavior.
+
+      apt_update_package_lists:
+        default: 1
+        type: int
+        description: Run apt-get update every n days, where 0 disables it.
+
+      apt_download_upgradeable_packages:
+        default: 0
+        type: int
+        description: Download upgradeable packages every n days, where 0 disables it.
+
+      apt_auto_clean_interval:
+        default: 0
+        type: int
+        description: Run apt autoclean every n days, where 0 disables it.
+
+      apt_unattended_upgrades:
+        default: true
+        type: bool
+        description: Enable unattended-upgrades.
+
+      apt_unattended_upgrades_origins:
+        default: []
+        type: list
+        elements: str
+        description: Origins patterns to control package upgrade sources.
+
+      apt_unattended_upgrades_allowed:
+        default:
+          - ${distro_id}:${distro_codename}-security
+        type: list
+        elements: str
+        description: Allowed origins for unattended upgrades.
+
+      apt_unattended_upgrades_blacklist:
+        default: []
+        type: list
+        elements: str
+        description: Packages excluded from unattended upgrades.
+
+      apt_unattended_upgrades_minimal_steps:
+        default: false
+        type: bool
+        description: Split upgrades into small chunks to support interruption.
+
+      apt_mails:
+        default: []
+        type: list
+        elements: str
+        description: Email recipients for unattended-upgrades notifications.
+
+      apt_unattended_upgrades_notify_error_only:
+        default: true
+        type: bool
+        description: Send email notifications only when errors occur.
+
+      apt_unattended_upgrades_autoremove:
+        default: true
+        type: bool
+        description: Auto-remove unused dependencies after unattended upgrades.
+
+      apt_unattended_upgrades_automatic_reboot:
+        default: false
+        type: bool
+        description: Reboot automatically when required after unattended upgrades.
+
+      apt_unattended_upgrades_automatic_reboot_with_users:
+        default: false
+        type: bool
+        description: Reboot automatically even if users are currently logged in.
+
+      apt_unattended_upgrades_automatic_reboot_time:
+        default: now
+        type: str
+        description: Reboot time used when automatic reboot is enabled.
+
+      apt_unattended_upgrades_syslog_enable:
+        default: false
+        type: bool
+        description: Enable logging unattended-upgrades events to syslog.
+
+      apt_unattended_upgrades_syslog_facility:
+        default: daemon
+        type: str
+        description: Syslog facility to use for unattended-upgrades logs.
+
+      apt_unattended_upgrades_download_timer_override:
+        default: null
+        type: dict
+        description: Override settings for apt-daily download timer.
+
+      apt_unattended_upgrades_upgrade_timer_override:
+        default: null
+        type: dict
+        description: Override settings for apt-daily-upgrade timer.
+
+      apt_remount_filesystems:
+        default: []
+        type: list
+        elements: str
+        description: File systems to remount before running apt tasks.
+
+      apt_repositories:
+        default: []
+        type: list
+        elements: dict
+        description: Repositories to manage.
+
+      apt_repositories_use_deb822:
+        default: true
+        type: bool
+        description: Use deb822_repository format for apt repositories.
+
+      apt_keys:
+        default: []
+        type: list
+        elements: dict
+        description: GPG keys to register for external repositories.
+
+      apt_http_proxy_address:
+        type: str
+        required: false
+        description: Optional HTTP proxy address used by apt.
+
+      apt_http_pipeline_depth:
+        type: int
+        required: false
+        description: Optional apt HTTP pipeline depth value.
+
+      apt_aptitude_solution_cost:
+        default: []
+        type: list
+        elements: str
+        description: Aptitude solution cost settings.
+
+      apt_preferences:
+        default: []
+        type: list
+        elements: dict
+        description: Apt pinning preferences to manage.
