@@ -19,7 +19,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   readme:
-    name: create roles readme
+    name: Create roles readme
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
