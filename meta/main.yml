@@ -16,10 +16,14 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - all
+        - "22.04"
+        - "24.04"
+        - "26.04"
     - name: Debian
       versions:
-        - all
+        - 11
+        - 12
+        - 13
   galaxy_tags:
     - system
     - apt

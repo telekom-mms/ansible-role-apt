@@ -1,8 +1,9 @@
 output_template: |
   <!-- BEGIN_ANSIBLE_DOCS -->
 
-  [![Linting](https://github.com/telekom-mms/ansible-apt/workflows/linting/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions?query=workflow%3Alinting)
-  [![Molecule](https://github.com/telekom-mms/ansible-apt/workflows/molecule/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions?query=workflow%3Amolecule)
+  [![Linting](https://github.com/telekom-mms/ansible-apt/actions/workflows/linting.yml/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions/workflows/linting.yml)
+  [![Molecule](https://github.com/telekom-mms/ansible-apt/actions/workflows/molecule.yml/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions/workflows/molecule.yml)
+  [![Publish role to Ansible Galaxy](https://github.com/telekom-mms/ansible-apt/actions/workflows/galaxy.yml/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions/workflows/galaxy.yml)
 
   # Ansible role {{ metadata.galaxy_info.namespace }}.{{ metadata.galaxy_info.role_name }}
 
@@ -10,14 +11,15 @@ output_template: |
 
   {{ metadata.galaxy_info.description }}
 
-  ## Supported Operating Systems
-
-  {%- for platform in metadata.galaxy_info.platforms %}
+  ## Supported and tested Operating Systems
+  {% for platform in metadata.galaxy_info.platforms %}
   - {{ platform.name }}
     {%- if "versions" in platform %}
     - {{ platform.versions | default([]) | join(', ') }}
     {%- endif %}
   {%- endfor %}
+
+  `This role may also work on other Debian-based systems.`
 
   ## Role Variables
   {% for entrypoint in argument_specs.keys() %}
