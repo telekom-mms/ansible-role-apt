@@ -1,0 +1,22 @@
+---
+- name: Prepare
+  hosts: all
+  post_tasks:
+    - name: Update APT cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Install python3-debian package
+      ansible.builtin.apt:
+        name: python3-debian
+        state: present
+
+    - name: Add icinga keyring on debian
+      when: ansible_facts.distribution == "Debian"
+      ansible.builtin.apt:
+        deb: "https://packages.icinga.com/icinga-archive-keyring_latest+{{ ansible_facts.distribution | lower }}{{ ansible_facts.distribution_major_version }}.deb"
+
+    - name: Add icinga keyring on ubuntu
+      when: ansible_facts.distribution == "Ubuntu"
+      ansible.builtin.apt:
+        deb: "https://packages.icinga.com/icinga-archive-keyring_latest+{{ ansible_facts.distribution | lower }}{{ ansible_facts.distribution_version }}.deb"

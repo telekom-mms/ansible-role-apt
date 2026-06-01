@@ -1,5 +1,8 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
+[![Linting](https://github.com/telekom-mms/ansible-apt/workflows/linting/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions?query=workflow%3Alinting)
+[![Molecule](https://github.com/telekom-mms/ansible-apt/workflows/molecule/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions?query=workflow%3Amolecule)
+
 # Ansible role telekom_mms.apt
 
 Thankfully forked from [weareinteractive.apt](https://github.com/weareinteractive/ansible-apt).

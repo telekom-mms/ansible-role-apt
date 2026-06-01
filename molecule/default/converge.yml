@@ -1,0 +1,148 @@
+---
+- name: Converge debian with apt repository deb822 format
+  hosts:
+    - debian13
+  vars:
+    apt_packages:
+      - vim
+      - tree
+      - name: ca-certificates
+        state: latest
+        hold: true
+      - name: zsh
+        state: absent
+        purge: true
+    apt_mails:
+      - root
+    apt_preferences:
+      - file: perl
+        package: perl
+        pin: "version 5.20*"
+        priority: 1001
+    apt_unattended_upgrades_notify_error_only: false
+    apt_remove_recommends: true
+    apt_remove_suggests: true
+    apt_remove_purge: true
+    apt_repositories:
+      - name: icinga
+        uris: https://packages.icinga.com/{{ ansible_facts.distribution | lower }}
+        suites: icinga-{{ ansible_facts.distribution_release }}
+        components:
+          - main
+        signed_by: /usr/share/keyrings/icinga-archive-keyring.gpg
+        types:
+          - deb
+        mode: 0644
+        state: present
+        update_cache: true
+  roles:
+    - telekom_mms.apt
+
+- name: Converge ubuntu with apt repository deb822 format
+  hosts:
+    - ubuntu2404
+    - ubuntu2604
+  vars:
+    apt_packages:
+      - vim
+      - tree
+      - name: ca-certificates
+        state: latest
+        hold: true
+      - name: zsh
+        state: absent
+        purge: true
+    apt_mails:
+      - root
+    apt_preferences:
+      - file: perl
+        package: perl
+        pin: "version 5.20*"
+        priority: 1001
+    apt_unattended_upgrades_notify_error_only: false
+    apt_remove_recommends: true
+    apt_remove_suggests: true
+    apt_remove_purge: true
+    apt_repositories:
+      - name: icinga
+        uris: https://packages.icinga.com/{{ ansible_facts.distribution | lower }}
+        suites: icinga-{{ ansible_facts.lsb.codename }}
+        components:
+          - main
+        signed_by: /usr/share/keyrings/icinga-archive-keyring.gpg
+        types:
+          - deb
+        mode: 0644
+        state: present
+        update_cache: true
+  roles:
+    - telekom_mms.apt
+
+- name: Converge ubuntu with apt repository legacy format
+  hosts: ubuntu2204
+  vars:
+    apt_packages:
+      - vim
+      - tree
+      - name: ca-certificates
+        state: latest
+        hold: true
+      - name: zsh
+        state: absent
+        purge: true
+    apt_mails:
+      - root
+    apt_preferences:
+      - file: perl
+        package: perl
+        pin: "version 5.20*"
+        priority: 1001
+    apt_unattended_upgrades_notify_error_only: false
+    apt_remove_recommends: true
+    apt_remove_suggests: true
+    apt_remove_purge: true
+    apt_repositories_use_deb822: false
+    apt_repositories:
+       - filename: icinga
+         codename: "{{ ansible_facts.lsb.codename }}"
+         mode: 0644
+         repo: "deb [signed-by=/usr/share/keyrings/icinga-archive-keyring.gpg] https://packages.icinga.com/{{ ansible_facts.distribution | lower }} icinga-{{ ansible_facts.lsb.codename }} main"
+         state: present
+         update_cache: true
+  roles:
+    - telekom_mms.apt
+
+- name: Converge debian with apt repository legacy format
+  hosts:
+    - debian11
+    - debian12
+  vars:
+    apt_packages:
+      - vim
+      - tree
+      - name: ca-certificates
+        state: latest
+        hold: true
+      - name: zsh
+        state: absent
+        purge: true
+    apt_mails:
+      - root
+    apt_preferences:
+      - file: perl
+        package: perl
+        pin: "version 5.20*"
+        priority: 1001
+    apt_unattended_upgrades_notify_error_only: false
+    apt_remove_recommends: true
+    apt_remove_suggests: true
+    apt_remove_purge: true
+    apt_repositories_use_deb822: false
+    apt_repositories:
+       - filename: icinga
+         mode: 0644
+         repo: "deb [signed-by=/usr/share/keyrings/icinga-archive-keyring.gpg] https://packages.icinga.com/{{ ansible_facts.distribution | lower }} icinga-{{ ansible_facts.distribution_release }} main"
+         state: present
+         update_cache: true
+  roles:
+    - telekom_mms.apt
