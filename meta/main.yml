@@ -1,14 +1,8 @@
 ---
 galaxy_info:
-  author: >-
-    franklin
-    z-bsod
-    beechesII
-  company: >-
-    2014-2024 We Are Interactive
-    2026-present Deutsche Telekom MMS GmbH
-  description: >-
-    Ansible role to manage apt packages and repositories on Debian-based systems.
+  author: "franklin, z-bsod, beechesII"
+  company: "2014-2024 We Are Interactive, 2026-present Deutsche Telekom MMS GmbH"
+  description: Ansible role to manage apt packages and repositories on Debian-based systems.
   min_ansible_version: "2.15"
   role_name: apt
   namespace: telekom_mms
