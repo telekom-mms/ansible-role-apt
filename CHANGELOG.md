@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/telekom-mms/ansible-apt/tree/2.4.0) (2026-06-01)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.3.2...2.4.0)
+
+**Implemented enhancements:**
+
+- feature: add molecule tests for debian and ubuntu distros [\#4](https://github.com/telekom-mms/ansible-apt/pull/4) ([beechesII](https://github.com/beechesII))
+
+**Merged pull requests:**
+
+- update master to create new main branch [\#5](https://github.com/telekom-mms/ansible-apt/pull/5) ([beechesII](https://github.com/beechesII))
+
 ## [2.3.2](https://github.com/telekom-mms/ansible-apt/tree/2.3.2) (2026-05-29)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.3.1...2.3.2)
