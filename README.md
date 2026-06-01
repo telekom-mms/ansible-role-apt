@@ -1,7 +1,8 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
-[![Linting](https://github.com/telekom-mms/ansible-apt/workflows/linting/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions?query=workflow%3Alinting)
-[![Molecule](https://github.com/telekom-mms/ansible-apt/workflows/molecule/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions?query=workflow%3Amolecule)
+[![Linting](https://github.com/telekom-mms/ansible-apt/actions/workflows/linting.yml/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions/workflows/linting.yml)
+[![Molecule](https://github.com/telekom-mms/ansible-apt/actions/workflows/molecule.yml/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions/workflows/molecule.yml)
+[![Publish role to Ansible Galaxy](https://github.com/telekom-mms/ansible-apt/actions/workflows/galaxy.yml/badge.svg)](https://github.com/telekom-mms/ansible-apt/actions/workflows/galaxy.yml)
 
 # Ansible role telekom_mms.apt
 
@@ -10,10 +11,13 @@ Thankfully forked from [weareinteractive.apt](https://github.com/weareinteractiv
 Ansible role to manage apt packages and repositories on Debian-based systems.
 
 ## Supported Operating Systems
+
 - Ubuntu
   - all
 - Debian
   - all
+
+This role is tested against Debian 11, 12, and 13, and Ubuntu 22.04, 24.04, and 26.04.
 
 ## Role Variables
 
