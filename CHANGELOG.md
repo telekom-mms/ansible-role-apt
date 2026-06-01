@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.1](https://github.com/telekom-mms/ansible-apt/tree/2.4.1) (2026-06-01)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.4.0...2.4.1)
+
+**Merged pull requests:**
+
+- docs\(apt\): updated docs and removed old tests [\#8](https://github.com/telekom-mms/ansible-apt/pull/8) ([beechesII](https://github.com/beechesII))
+
 ## [2.4.0](https://github.com/telekom-mms/ansible-apt/tree/2.4.0) (2026-06-01)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.3.2...2.4.0)
