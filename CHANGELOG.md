@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.3](https://github.com/telekom-mms/ansible-role-apt/tree/2.4.3) (2026-06-02)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.4.2...2.4.3)
+
+**Merged pull requests:**
+
+- fix: meta/main.yml and update readme.md with company information [\#11](https://github.com/telekom-mms/ansible-role-apt/pull/11) ([beechesII](https://github.com/beechesII))
+
 ## [2.4.2](https://github.com/telekom-mms/ansible-role-apt/tree/2.4.2) (2026-06-02)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.4.1...2.4.2)
