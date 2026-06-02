@@ -264,8 +264,9 @@ None.
 
 ```
 
-# License
+## License
 
-MIT
+* 2014-2024 We Are Interactive under MIT
+* 2026-present Deutsche Telekom MMS GmbH under MIT
 
 <!-- END_ANSIBLE_DOCS -->
