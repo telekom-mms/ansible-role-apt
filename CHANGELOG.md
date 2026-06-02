@@ -1,117 +1,125 @@
 # Changelog
 
-## [2.4.1](https://github.com/telekom-mms/ansible-apt/tree/2.4.1) (2026-06-01)
+## [2.4.2](https://github.com/telekom-mms/ansible-role-apt/tree/2.4.2) (2026-06-02)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.4.0...2.4.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.4.1...2.4.2)
 
 **Merged pull requests:**
 
-- docs\(apt\): updated docs and removed old tests [\#8](https://github.com/telekom-mms/ansible-apt/pull/8) ([beechesII](https://github.com/beechesII))
+- fix: meta/main.yml [\#9](https://github.com/telekom-mms/ansible-role-apt/pull/9) ([beechesII](https://github.com/beechesII))
 
-## [2.4.0](https://github.com/telekom-mms/ansible-apt/tree/2.4.0) (2026-06-01)
+## [2.4.1](https://github.com/telekom-mms/ansible-role-apt/tree/2.4.1) (2026-06-01)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.3.2...2.4.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.4.0...2.4.1)
+
+**Merged pull requests:**
+
+- docs\(apt\): updated docs and removed old tests [\#8](https://github.com/telekom-mms/ansible-role-apt/pull/8) ([beechesII](https://github.com/beechesII))
+
+## [2.4.0](https://github.com/telekom-mms/ansible-role-apt/tree/2.4.0) (2026-06-01)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.3.2...2.4.0)
 
 **Implemented enhancements:**
 
-- feature: add molecule tests for debian and ubuntu distros [\#4](https://github.com/telekom-mms/ansible-apt/pull/4) ([beechesII](https://github.com/beechesII))
+- feature: add molecule tests for debian and ubuntu distros [\#4](https://github.com/telekom-mms/ansible-role-apt/pull/4) ([beechesII](https://github.com/beechesII))
 
 **Merged pull requests:**
 
-- update master to create new main branch [\#5](https://github.com/telekom-mms/ansible-apt/pull/5) ([beechesII](https://github.com/beechesII))
+- update master to create new main branch [\#5](https://github.com/telekom-mms/ansible-role-apt/pull/5) ([beechesII](https://github.com/beechesII))
 
-## [2.3.2](https://github.com/telekom-mms/ansible-apt/tree/2.3.2) (2026-05-29)
+## [2.3.2](https://github.com/telekom-mms/ansible-role-apt/tree/2.3.2) (2026-05-29)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.3.1...2.3.2)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.3.1...2.3.2)
 
 **Merged pull requests:**
 
-- organization onboarding for role ansible-apt [\#2](https://github.com/telekom-mms/ansible-apt/pull/2) ([beechesII](https://github.com/beechesII))
-- debian 13 compatibility [\#1](https://github.com/telekom-mms/ansible-apt/pull/1) ([z-bsod](https://github.com/z-bsod))
+- organization onboarding for role ansible-apt [\#2](https://github.com/telekom-mms/ansible-role-apt/pull/2) ([beechesII](https://github.com/beechesII))
+- debian 13 compatibility [\#1](https://github.com/telekom-mms/ansible-role-apt/pull/1) ([z-bsod](https://github.com/z-bsod))
 
-## [2.3.1](https://github.com/telekom-mms/ansible-apt/tree/2.3.1) (2017-12-18)
+## [2.3.1](https://github.com/telekom-mms/ansible-role-apt/tree/2.3.1) (2017-12-18)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.3.0...2.3.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.3.0...2.3.1)
 
-## [2.3.0](https://github.com/telekom-mms/ansible-apt/tree/2.3.0) (2017-12-18)
+## [2.3.0](https://github.com/telekom-mms/ansible-role-apt/tree/2.3.0) (2017-12-18)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.2.0...2.3.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.2.0...2.3.0)
 
-## [2.2.0](https://github.com/telekom-mms/ansible-apt/tree/2.2.0) (2017-08-24)
+## [2.2.0](https://github.com/telekom-mms/ansible-role-apt/tree/2.2.0) (2017-08-24)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.1.0...2.2.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.1.0...2.2.0)
 
-## [2.1.0](https://github.com/telekom-mms/ansible-apt/tree/2.1.0) (2017-01-27)
+## [2.1.0](https://github.com/telekom-mms/ansible-role-apt/tree/2.1.0) (2017-01-27)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.0.3...2.1.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.0.3...2.1.0)
 
-## [2.0.3](https://github.com/telekom-mms/ansible-apt/tree/2.0.3) (2016-08-18)
+## [2.0.3](https://github.com/telekom-mms/ansible-role-apt/tree/2.0.3) (2016-08-18)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.0.2...2.0.3)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.0.2...2.0.3)
 
-## [2.0.2](https://github.com/telekom-mms/ansible-apt/tree/2.0.2) (2016-04-25)
+## [2.0.2](https://github.com/telekom-mms/ansible-role-apt/tree/2.0.2) (2016-04-25)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.0.1...2.0.2)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.0.1...2.0.2)
 
-## [2.0.1](https://github.com/telekom-mms/ansible-apt/tree/2.0.1) (2016-03-22)
+## [2.0.1](https://github.com/telekom-mms/ansible-role-apt/tree/2.0.1) (2016-03-22)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/2.0.0...2.0.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.0.0...2.0.1)
 
-## [2.0.0](https://github.com/telekom-mms/ansible-apt/tree/2.0.0) (2016-03-15)
+## [2.0.0](https://github.com/telekom-mms/ansible-role-apt/tree/2.0.0) (2016-03-15)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.8.0...2.0.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.8.0...2.0.0)
 
-## [1.8.0](https://github.com/telekom-mms/ansible-apt/tree/1.8.0) (2016-01-11)
+## [1.8.0](https://github.com/telekom-mms/ansible-role-apt/tree/1.8.0) (2016-01-11)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.7.1...1.8.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.7.1...1.8.0)
 
-## [1.7.1](https://github.com/telekom-mms/ansible-apt/tree/1.7.1) (2015-12-03)
+## [1.7.1](https://github.com/telekom-mms/ansible-role-apt/tree/1.7.1) (2015-12-03)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.7.0...1.7.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.7.0...1.7.1)
 
-## [1.7.0](https://github.com/telekom-mms/ansible-apt/tree/1.7.0) (2015-11-30)
+## [1.7.0](https://github.com/telekom-mms/ansible-role-apt/tree/1.7.0) (2015-11-30)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.6.2...1.7.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.6.2...1.7.0)
 
-## [1.6.2](https://github.com/telekom-mms/ansible-apt/tree/1.6.2) (2015-07-07)
+## [1.6.2](https://github.com/telekom-mms/ansible-role-apt/tree/1.6.2) (2015-07-07)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.6.1...1.6.2)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.6.1...1.6.2)
 
-## [1.6.1](https://github.com/telekom-mms/ansible-apt/tree/1.6.1) (2015-05-25)
+## [1.6.1](https://github.com/telekom-mms/ansible-role-apt/tree/1.6.1) (2015-05-25)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.6.0...1.6.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.6.0...1.6.1)
 
-## [1.6.0](https://github.com/telekom-mms/ansible-apt/tree/1.6.0) (2015-05-20)
+## [1.6.0](https://github.com/telekom-mms/ansible-role-apt/tree/1.6.0) (2015-05-20)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.5.0...1.6.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.5.0...1.6.0)
 
-## [1.5.0](https://github.com/telekom-mms/ansible-apt/tree/1.5.0) (2015-04-06)
+## [1.5.0](https://github.com/telekom-mms/ansible-role-apt/tree/1.5.0) (2015-04-06)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.4.0...1.5.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.4.0...1.5.0)
 
-## [1.4.0](https://github.com/telekom-mms/ansible-apt/tree/1.4.0) (2014-10-11)
+## [1.4.0](https://github.com/telekom-mms/ansible-role-apt/tree/1.4.0) (2014-10-11)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.3.1...1.4.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.3.1...1.4.0)
 
-## [1.3.1](https://github.com/telekom-mms/ansible-apt/tree/1.3.1) (2014-09-15)
+## [1.3.1](https://github.com/telekom-mms/ansible-role-apt/tree/1.3.1) (2014-09-15)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.3.0...1.3.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.3.0...1.3.1)
 
-## [1.3.0](https://github.com/telekom-mms/ansible-apt/tree/1.3.0) (2014-09-15)
+## [1.3.0](https://github.com/telekom-mms/ansible-role-apt/tree/1.3.0) (2014-09-15)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.2.1...1.3.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.2.1...1.3.0)
 
-## [1.2.1](https://github.com/telekom-mms/ansible-apt/tree/1.2.1) (2014-09-12)
+## [1.2.1](https://github.com/telekom-mms/ansible-role-apt/tree/1.2.1) (2014-09-12)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.2.0...1.2.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.2.0...1.2.1)
 
-## [1.2.0](https://github.com/telekom-mms/ansible-apt/tree/1.2.0) (2014-09-11)
+## [1.2.0](https://github.com/telekom-mms/ansible-role-apt/tree/1.2.0) (2014-09-11)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/1.1.0...1.2.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/1.1.0...1.2.0)
 
-## [1.1.0](https://github.com/telekom-mms/ansible-apt/tree/1.1.0) (2014-08-21)
+## [1.1.0](https://github.com/telekom-mms/ansible-role-apt/tree/1.1.0) (2014-08-21)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-apt/compare/a4b56044f7ee90e5d1c028da1ada940b3fe33ca2...1.1.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/a4b56044f7ee90e5d1c028da1ada940b3fe33ca2...1.1.0)
 
 
 
