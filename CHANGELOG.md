@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- Fix meta/main.yml [\#10](https://github.com/telekom-mms/ansible-role-apt/pull/10) ([beechesII](https://github.com/beechesII))
 - fix: meta/main.yml [\#9](https://github.com/telekom-mms/ansible-role-apt/pull/9) ([beechesII](https://github.com/beechesII))
 
 ## [2.4.1](https://github.com/telekom-mms/ansible-role-apt/tree/2.4.1) (2026-06-01)
