@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.4](https://github.com/telekom-mms/ansible-role-apt/tree/2.4.4) (2026-11-19)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.4.3...2.4.4)
+
+**Merged pull requests:**
+
+- fix "update\_url" when using legacy repos [\#12](https://github.com/telekom-mms/ansible-role-apt/pull/12) ([z-bsod](https://github.com/z-bsod))
+
 ## [2.4.3](https://github.com/telekom-mms/ansible-role-apt/tree/2.4.3) (2026-06-02)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-role-apt/compare/2.4.2...2.4.3)
