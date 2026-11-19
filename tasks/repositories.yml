@@ -66,7 +66,7 @@
     - item.update_url
     - item.filename is defined
   ansible.builtin.file:
-    path: "{{ item.filename }}"
+    path: "/etc/apt/sources.list.d/{{ item.filename }}.list"
     state: absent
   loop: "{{ apt_repositories }}"
 
